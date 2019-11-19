@@ -15,7 +15,9 @@ For the first table, employee information is culled from the employee table, joi
 ### Table 1 code
 -- Create a query that returns a list of current employees eligible for retirement, as well as their most recent titles. 
 -- Employee Information
-SELECT 
+
+SELECT
+	
 	e.emp_no, 
 	e.first_name, 
 	e.last_name, 
@@ -23,7 +25,9 @@ SELECT
 	t.from_date, 
 	t.to_date,
 	s.salary
-INTO emps_titles_salaries
+
+
+INTO emps_titles_salaries 
 FROM employees as e
 RIGHT JOIN titles as t
 ON (e.emp_no = t.emp_no)
@@ -31,11 +35,16 @@ RIGHT JOIN salaries as s
 ON (e.emp_no = s.emp_no)
 WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31');
 
-
+![Table 1](https://github.com/prentiss04/Pewlett-Hackard-Analysis_pdouglass/blob/master/Analysis%20Projects%20Folder/Pewlett-Hackard-Analysis%20Folder/Queries/Table_1.PNG)
 
 ## Table 2 – Only Most Recent Titles
 Many employees from Table 1 have worked their way through PH and have held various titles. To get a clearer picture of who is available as a supervisor in their most advanced capacity, all previous roles are removed from the list. 
 A roll-up gives a quick glance at what roles have the greatest coverage for supervisory positions. 
 
+![Table 2](https://github.com/prentiss04/Pewlett-Hackard-Analysis_pdouglass/blob/master/Analysis%20Projects%20Folder/Pewlett-Hackard-Analysis%20Folder/Queries/Table_2.PNG)
+
 ## Table 3 – Mentor List
 This provides a name-by-name list of current employees primed for supervisory role. Rather than lean on employees who don’t have PH in their DNA (i.e. long-tenured), we looked at staff hired in 1985 as that would provide a suitable amount of experience to understand the nuance of working at PH. There was some confusion that the hire date needed to occur in 1965, yet we were already tasked with looking at people born in 1965.
+
+
+![Table 3](https://github.com/prentiss04/Pewlett-Hackard-Analysis_pdouglass/blob/master/Analysis%20Projects%20Folder/Pewlett-Hackard-Analysis%20Folder/Queries/Table_3.PNG)
