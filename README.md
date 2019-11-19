@@ -7,7 +7,7 @@ For future examination, we may want to consider broadening the range of hiring y
 
 Additionally, we only looked at one hiring year (1965) which is a rather tight window. Opening up the range may prove to expand the list some without becoming overwhelming. 
 
-![]https://github.com/prentiss04/Pewlett-Hackard-Analysis_pdouglass/blob/master/challenge.PNG
+![https://github.com/prentiss04/Pewlett-Hackard-Analysis_pdouglass/blob/master/challenge.PNG]
 
 ## Table 1 – Imminent Retirees
 For the first table, employee information is culled from the employee table, joined with both the titles and salaries tables winnowed by birthdates in 1965. This provides a preliminary high-level view of the individuals and experience that will be retiring imminently though not a fully refined list as many of the individuals will appear more than once due to multiple positions as well as people who are no longer at PH. 
