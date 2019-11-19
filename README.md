@@ -16,8 +16,10 @@ For the first table, employee information is culled from the employee table, joi
 -- Create a query that returns a list of current employees eligible for retirement, as well as their most recent titles. 
 -- Employee Information
 
-SELECT
-	
+```
+-- Create a query that returns a list of current employees eligible for retirement, as well as their most recent titles. 
+-- Employee Information
+SELECT 
 	e.emp_no, 
 	e.first_name, 
 	e.last_name, 
@@ -25,15 +27,13 @@ SELECT
 	t.from_date, 
 	t.to_date,
 	s.salary
-
-
-INTO emps_titles_salaries 
+INTO emps_titles_salaries
 FROM employees as e
 RIGHT JOIN titles as t
 ON (e.emp_no = t.emp_no)
 RIGHT JOIN salaries as s
 ON (e.emp_no = s.emp_no)
-WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31');
+WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31');```
 
 ![Table 1](https://github.com/prentiss04/Pewlett-Hackard-Analysis_pdouglass/blob/master/Analysis%20Projects%20Folder/Pewlett-Hackard-Analysis%20Folder/Queries/Table_1.PNG)
 
