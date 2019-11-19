@@ -43,10 +43,64 @@ WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31');
 Many employees from Table 1 have worked their way through PH and have held various titles. To get a clearer picture of who is available as a supervisor in their most advanced capacity, all previous roles are removed from the list. 
 A roll-up gives a quick glance at what roles have the greatest coverage for supervisory positions. 
 
+```
+-- Display duplicates with all information
+SELECT 
+	emp_no, 
+	first_name, 
+	last_name, 
+	title, 
+	from_date,
+	to_date,
+	salary
+INTO recent_titles_by_emp_no
+FROM
+  (SELECT 
+   	ets.emp_no, 
+   	ets.first_name, 
+   	ets.last_name, 
+   	ets.title, 
+   	ets.from_date, 
+    ets.to_date,
+   	ets.salary,
+     ROW_NUMBER() OVER (
+		 PARTITION BY (ets.emp_no) 
+		 ORDER BY ets.from_date DESC) 
+   	rn
+FROM emps_titles_salaries AS ets
+  ) tmp WHERE rn = 1;
+
+DROP TABLE recent_titles_by_emp_no
+
+-- Title roll-up by date (descending)
+SELECT COUNT(title),
+	title
+INTO mentor_rollup_summary
+FROM recent_titles_by_emp_no
+WHERE (to_date = '9999-01-01')
+GROUP BY title, to_date
+ORDER BY to_date DESC;
+```
+
 ![Table 2](https://github.com/prentiss04/Pewlett-Hackard-Analysis_pdouglass/blob/master/Analysis%20Projects%20Folder/Pewlett-Hackard-Analysis%20Folder/Queries/Table_2.PNG)
 
 ## Table 3 – Mentor List
 This provides a name-by-name list of current employees primed for supervisory role. Rather than lean on employees who don’t have PH in their DNA (i.e. long-tenured), we looked at staff hired in 1985 as that would provide a suitable amount of experience to understand the nuance of working at PH. There was some confusion that the hire date needed to occur in 1965, yet we were already tasked with looking at people born in 1965.
 
+```
+SELECT 
+	rte.emp_no, 
+	rte.first_name, 
+	rte.last_name, 
+	rte.title, 
+	rte.from_date,
+	rte.to_date
+INTO mentor_table_final
+FROM recent_titles_by_emp_no AS rte
+RIGHT JOIN employees as e
+ON (rte.emp_no = e.emp_no)
+WHERE (e.hire_date BETWEEN '1985-01-01' AND '1985-12-31')
+AND (rte.to_date = '9999-01-01');
+```
 
 ![Table 3](https://github.com/prentiss04/Pewlett-Hackard-Analysis_pdouglass/blob/master/Analysis%20Projects%20Folder/Pewlett-Hackard-Analysis%20Folder/Queries/Table_3.PNG)
