@@ -35,6 +35,7 @@ RIGHT JOIN salaries as s
 ON (e.emp_no = s.emp_no)
 WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31');```
 
+
 ![Table 1](https://github.com/prentiss04/Pewlett-Hackard-Analysis_pdouglass/blob/master/Analysis%20Projects%20Folder/Pewlett-Hackard-Analysis%20Folder/Queries/Table_1.PNG)
 
 ## Table 2 – Only Most Recent Titles
