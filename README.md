@@ -12,6 +12,27 @@ Additionally, we only looked at one hiring year (1965) which is a rather tight w
 ## Table 1 – Imminent Retirees
 For the first table, employee information is culled from the employee table, joined with both the titles and salaries tables winnowed by birthdates in 1965. This provides a preliminary high-level view of the individuals and experience that will be retiring imminently though not a fully refined list as many of the individuals will appear more than once due to multiple positions as well as people who are no longer at PH. 
 
+### Table 1 code
+-- Create a query that returns a list of current employees eligible for retirement, as well as their most recent titles. 
+-- Employee Information
+SELECT 
+	e.emp_no, 
+	e.first_name, 
+	e.last_name, 
+	t.title,
+	t.from_date, 
+	t.to_date,
+	s.salary
+INTO emps_titles_salaries
+FROM employees as e
+RIGHT JOIN titles as t
+ON (e.emp_no = t.emp_no)
+RIGHT JOIN salaries as s
+ON (e.emp_no = s.emp_no)
+WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31');
+
+
+
 ## Table 2 – Only Most Recent Titles
 Many employees from Table 1 have worked their way through PH and have held various titles. To get a clearer picture of who is available as a supervisor in their most advanced capacity, all previous roles are removed from the list. 
 A roll-up gives a quick glance at what roles have the greatest coverage for supervisory positions. 
